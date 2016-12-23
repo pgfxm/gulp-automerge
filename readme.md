@@ -31,7 +31,7 @@ There are 8 options:
 * `replaceExt` (string): 引入template文件的后缀名，默认为'.wxml'
 * `regexp` (regexp): 匹配模板名的正常表达式，默认为：/<import [^>]*src=[\'\"][^\'\"]+?\/template\/(\w+)\.\w+[\'\"]\s*\/>/g.
 * `appendTpl` (string): 引入template 样式的模板字串，默认为：'@import "../../style/widget/{name}.scss";'
-
+* `isPrefixApplyToAll`(boolean): true:prefixText应用于所有匹配到的文件，false:prefixText仅应用于有对应replaceExt文件的文件，默认为false
 
 ## Tip
 

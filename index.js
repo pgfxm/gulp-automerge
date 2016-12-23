@@ -8,6 +8,7 @@ var PluginError = gutil.PluginError;
 const PLUGIN_NAME = 'gulp-automerge';
 var defaultOptions = {
 	prefixText: '',
+	isPrefixApplyToAll: false,
 	replaceExt: '.wxml',
 	regexp:/<import [^>]*src=[\'\"][^\'\"]+?\/template\/(\w+)\.\w+[\'\"]\s*\/>/g,
 	appendTpl: '@import "../../style/widget/{name}.scss";'
@@ -60,6 +61,9 @@ module.exports = function (options) {
 				return $0;
 			});
 
+		}else if(!options.isPrefixApplyToAll){
+			cb(null, file);
+			return;
 		}
 
 		if(appendContent){
