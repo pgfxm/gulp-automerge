@@ -26,6 +26,9 @@ function extend(def, target){
 	return target;
 }
 module.exports = function (options) {
+	if(!options){
+		options = {};
+	}
 	extend(defaultOptions, options);
 
 /*

@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "该插件主要实现给匹配文件追加一段内容",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "homepage": "https://github.com/sindresorhus/gulp-automerge#readme",
+  "homepage": "https://github.com/pgfxm/gulp-automerge",
   "keywords": [
     "gulpplugin",
     "automerge",
@@ -25,14 +22,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sindresorhus/gulp-automerge.git"
+    "url": "https://github.com/pgfxm/gulp-automerge.git"
   },
   "author": "pgf",
   "license": "MIT",
   "maintainers": [
     {
-      "name": "Vanessa",
-      "email": "lly219@gmail.com"
+      "name": "pgf",
+      "email": "pgf99@qq.com"
     }
   ]
 }

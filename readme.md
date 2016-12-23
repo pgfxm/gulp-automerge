@@ -1,20 +1,12 @@
-# gulp-autoprefixer [![Build Status](https://travis-ci.org/sindresorhus/gulp-autoprefixer.svg?branch=master)](https://travis-ci.org/sindresorhus/gulp-autoprefixer)
+# gulp-automerge 
 
-> Prefix CSS with [Autoprefixer](https://github.com/postcss/autoprefixer)
-
-*Issues with the output should be reported on the Autoprefixer [issue tracker](https://github.com/postcss/autoprefixer/issues).*
-
----
-
-<p align="center"><b>🔥 Want to strengthen your core JavaScript skills and master ES6?</b><br>I would personally recommend this awesome <a href="https://ES6.io/friend/AWESOME">ES6 course</a> by Wes Bos.</p>
-
----
+*该插件主要是为了给小程序项目实现template样式自动引入到相应页面.*
 
 
 ## Install
 
 ```
-$ npm install --save-dev gulp-autoprefixer
+$ npm install --save-dev gulp-automerge
 ```
 
 
@@ -22,52 +14,28 @@ $ npm install --save-dev gulp-autoprefixer
 
 ```js
 const gulp = require('gulp');
-const autoprefixer = require('gulp-autoprefixer');
+const automerge = require('gulp-automerge');
 
 gulp.task('default', () =>
-	gulp.src('src/app.css')
-		.pipe(autoprefixer({
-			browsers: ['last 2 versions'],
-			cascade: false
-		}))
+	gulp.src('src/*.wxss')
+		.pipe(automerge({}))
 		.pipe(gulp.dest('dist'))
 );
 ```
 
+## Options
 
-## API
+There are 8 options:
 
-### autoprefixer([options])
-
-#### options
-
-See the Autoprefixer [options](https://github.com/postcss/autoprefixer#options).
-
-
-## Source Maps
-
-Use [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) like this:
-
-```js
-const gulp = require('gulp');
-const sourcemaps = require('gulp-sourcemaps');
-const autoprefixer = require('gulp-autoprefixer');
-const concat = require('gulp-concat');
-
-gulp.task('default', () =>
-	gulp.src('src/**/*.css')
-		.pipe(sourcemaps.init())
-		.pipe(autoprefixer())
-		.pipe(concat('all.css'))
-		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest('dist'))
-);
-```
+* `prefixText` (string): 默认追加到文件头的内容，默认值为空
+* `replaceExt` (string): 引入template文件的后缀名，默认为'.wxml'
+* `regexp` (regexp): 匹配模板名的正常表达式，默认为：/<import [^>]*src=[\'\"][^\'\"]+?\/template\/(\w+)\.\w+[\'\"]\s*\/>/g.
+* `appendTpl` (string): 引入template 样式的模板字串，默认为：'@import "../../style/widget/{name}.scss";'
 
 
 ## Tip
 
-You might want to use Autoprefixer as a [PostCSS plugin](https://github.com/postcss/autoprefixer#gulp) if you use other PostCSS plugins in your build process.
+你可以在小程序里的项目引用该插件，他能帮你自动引入模板样式
 
 
 ## License
