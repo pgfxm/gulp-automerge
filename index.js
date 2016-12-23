@@ -46,31 +46,35 @@ module.exports = function (options) {
 		//console.log([k,file[k]]);
 		console.log(file.relative)
 		var path = file.path.replace(/\.\w+$/,options.replaceExt);
-		var fileContent = fs.readFileSync(path, 'utf8');
 		var appendContent = options.prefixText;
-		var tpls = [];
-		fileContent.replace(options.regexp,function($0,$1){
-			if($1){
-				if (tpls.indexOf($1) == -1){//去重
-					tpls.push($1);
-					appendContent += '\n' + options.appendTpl.replace('{name}', $1);
+		if(fs.existsSync(path)){
+			var fileContent = fs.readFileSync(path, 'utf8');
+			var tpls = [];
+			fileContent.replace(options.regexp,function($0,$1){
+				if($1){
+					if (tpls.indexOf($1) == -1){//去重
+						tpls.push($1);
+						appendContent += '\n' + options.appendTpl.replace('{name}', $1);
+					}
 				}
+				return $0;
+			});
+
+		}
+
+		if(appendContent){
+			appendContent = new Buffer(appendContent + '\n'); // 预先分配
+
+/*			if (file.isNull()) {
+				// 返回空文件
+				cb(null, file);
+			}*/
+			if (file.isBuffer()) {
+				file.contents = Buffer.concat([appendContent, file.contents]);
 			}
-			return $0;
-		});
-		appendContent = new Buffer(appendContent + '\n'); // 预先分配
-
-
-
-		if (file.isNull()) {
-			// 返回空文件
-			cb(null, file);
-		}
-		if (file.isBuffer()) {
-			file.contents = Buffer.concat([appendContent, file.contents]);
-		}
-		if (file.isStream()) {
-			file.contents = file.contents.pipe(prefixStream(appendContent));
+			if (file.isStream()) {
+				file.contents = file.contents.pipe(prefixStream(appendContent));
+			}
 		}
 
 		cb(null, file);

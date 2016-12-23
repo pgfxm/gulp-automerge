@@ -1,6 +1,6 @@
 {
   "name": "gulp-automerge",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "该插件主要实现给匹配文件追加一段内容",
   "main": "index.js",
   "homepage": "https://github.com/pgfxm/gulp-automerge",
