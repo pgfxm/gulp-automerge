@@ -38,6 +38,7 @@ There are 8 options:
 * `appendTpl` (string): 引入template 样式的模板字串，默认为：'@import "{relativePrefix}style/widget/{name}.scss";'，{relativePrefix}是代表引入样式的相对路径，{name}是代表对应的template名
 * `prefixApplyType`(string): all:prefixText应用于所有匹配到的文件，page:prefixText仅应用于当前文件有对应page页面（即replaceExt扩展名文件）的文件，template:prefixText仅应用于当前文件对应的page文件内容能匹配regexp的文件。默认为page
 * prefixText和appendTpl里可以用{relativePrefix}来取代相对路径
+
 ## Tip
 
 你可以在小程序里的项目引用该插件，经过适当调整目录结构和保持每个template有独立文件和独立样式，他能帮你自动引入页面引用的template样式以及每个页面公共的样式。
