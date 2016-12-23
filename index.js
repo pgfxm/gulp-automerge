@@ -11,7 +11,7 @@ var defaultOptions = {
 	isPrefixApplyToAll: false,
 	replaceExt: '.wxml',
 	regexp:/<import [^>]*src=[\'\"][^\'\"]+?\/template\/(\w+)\.\w+[\'\"]\s*\/>/g,
-	appendTpl: '@import "../../style/widget/{name}.scss";'
+	appendTpl: '@import "{relativePrefix}style/widget/{name}.scss";'
 }
 function prefixStream(prefixText) {
 	var stream = through();
@@ -45,7 +45,8 @@ module.exports = function (options) {
 	return through.obj(function(file, enc, cb) {
 		//for(var k in file)
 		//console.log([k,file[k]]);
-		console.log(file.relative)
+		//console.log([file.relative,file.base,file.path])
+		var relativePrefix = file.relative.replace(/([^\/]+)/g,'..').replace(/[^\/]+$/,'');
 		var path = file.path.replace(/\.\w+$/,options.replaceExt);
 		var appendContent = options.prefixText;
 		if(fs.existsSync(path)){
@@ -67,6 +68,7 @@ module.exports = function (options) {
 		}
 
 		if(appendContent){
+			appendContent = appendContent.replace(/\{relativePrefix\}/g, relativePrefix);
 			appendContent = new Buffer(appendContent + '\n'); // 预先分配
 
 /*			if (file.isNull()) {
