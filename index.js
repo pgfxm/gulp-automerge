@@ -8,7 +8,7 @@ var PluginError = gutil.PluginError;
 const PLUGIN_NAME = 'gulp-automerge';
 var defaultOptions = {
 	prefixText: '',
-	isPrefixApplyToAll: false,
+	prefixApplyType: 'page',
 	replaceExt: '.wxml',
 	regexp:/<import [^>]*src=[\'\"][^\'\"]+?\/template\/(\w+)\.\w+[\'\"]\s*\/>/g,
 	appendTpl: '@import "{relativePrefix}style/widget/{name}.scss";'
@@ -31,7 +31,7 @@ module.exports = function (options) {
 		options = {};
 	}
 	extend(defaultOptions, options);
-
+	options.prefixApplyType = options.prefixApplyType.toLowerCase();
 /*
 	var prefixText = options.prefixText;
 
@@ -61,8 +61,12 @@ module.exports = function (options) {
 				}
 				return $0;
 			});
+			if(options.prefixApplyType == 'template' && !tpls.length){//追加内容仅应用到引入了模板的页面
+				cb(null, file);
+				return;
+			}
 
-		}else if(!options.isPrefixApplyToAll){
+		}else if(options.prefixApplyType != 'all'){
 			cb(null, file);
 			return;
 		}
