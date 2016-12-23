@@ -48,17 +48,17 @@ module.exports = function (options) {
 		var path = file.path.replace(/\.\w+$/,options.replaceExt);
 		var fileContent = fs.readFileSync(path, 'utf8');
 		var appendContent = options.prefixText;
-		//var tpls = [];
+		var tpls = [];
 		fileContent.replace(options.regexp,function($0,$1){
 			if($1){
 				if (tpls.indexOf($1) == -1){//去重
-					//tpls.push($1);
-					appendContent += options.appendTpl.replace('{name}', $1);
+					tpls.push($1);
+					appendContent += '\n' + options.appendTpl.replace('{name}', $1);
 				}
 			}
 			return $0;
 		});
-		appendContent = new Buffer(appendContent); // 预先分配
+		appendContent = new Buffer(appendContent + '\n'); // 预先分配
 
 
 
