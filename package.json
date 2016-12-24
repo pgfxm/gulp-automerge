@@ -1,6 +1,6 @@
 {
   "name": "gulp-automerge",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "该插件主要实现给匹配文件头部追加一段内容,是为了在自己的小程序项目更方便的引入template，而写的一个分析页面引入的template文件，实现自动在当前页面样式里引入相应template的样式，前提是每个template有独立的样式文件.",
   "main": "index.js",
   "homepage": "https://github.com/pgfxm/gulp-automerge",
