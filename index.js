@@ -7,6 +7,7 @@ var PluginError = gutil.PluginError;
 // 常量
 const PLUGIN_NAME = 'gulp-automerge';
 var defaultOptions = {
+	rootPath: '/src/',//项目的根目录
 	prefixText: '',
 	prefixApplyType: 'page',
 	replaceExt: '.wxml',
@@ -46,7 +47,12 @@ module.exports = function (options) {
 		//for(var k in file)
 		//console.log([k,file[k]]);
 		//console.log([file.relative,file.base,file.path])
-		var relativePrefix = file.relative.replace(/([^\/]+)/g,'..').replace(/[^\/]+$/,'');
+
+		var relativePrefix = options.rootPath?file.path.replace(file.cwd+options.rootPath,''):file.relative;
+		if(relativePrefix.indexOf('/')===0){
+			relativePrefix = relativePrefix.substr(1);
+		}
+		relativePrefix = relativePrefix.replace(/([^\/]+)/g,'..').replace(/[^\/]+$/,'');
 		var path = file.path.replace(/\.\w+$/,options.replaceExt);
 		var appendContent = options.prefixText;
 		if(fs.existsSync(path)){

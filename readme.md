@@ -31,7 +31,7 @@ gulp.task('default', () =>
 ## Options
 
 There are 8 options:
-
+* `rootPath` (string): 项目的存放根目录,相对于当前运行gulp命令的目录,以/开头，一般为/src
 * `prefixText` (string): 默认追加到文件头部的内容，默认值为空
 * `replaceExt` (string): 匹配wxss对应的page文件的后缀名，默认为'.wxml'
 * `regexp` (regexp): 匹配模板名的正常表达式，默认为：/<import [^>]*src=[\'\"][^\'\"]+?\/template\/(\w+)\.\w+[\'\"]\s*\/>/g.我的模板是放在项目src/template/里
